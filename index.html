@@ -32,14 +32,18 @@
 		padding: 6px 12px;
 		border-top: none;
 	}
+	
+	.hide {
+		display: none;
+	}
 </style>
 </head>
 <body>
 
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'General')">General</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+  <button class="tablinks, none" onclick="openCity(event, 'Paris')">Paris</button>
+  <button class="tablinks, none" onclick="openCity(event, 'Tokyo')">Tokyo</button>
 </div>
 
 <div id="General" class="tabcontent">
