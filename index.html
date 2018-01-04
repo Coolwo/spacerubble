@@ -1,110 +1,178 @@
 <html>
-<head>
-<style>
-	body {
-		font-family: "Times New Roman", Times, serif;
-	}
-	
-	.padding {
-		padding-left:200px;
-	}
-	
-	.tab {
-		overflow: hidden;
-	}
-
-	.tab button {
-		background-color: inherit;
-		float: left;
-		border: none;
-		outline: none;
-		cursor: pointer;
-		padding: 14px 16px;
-		transition: 0.1s;
-		font-size: 17px;
-		font-family: "Times New Roman", Times, serif;
-		text-decoration: underline;
-	}
-
-	.tab button.active {
-		background-color: #fbfbfb;
-	}
-
-	.tabcontent {
-		display: none;
-		padding: 6px 12px;
-		border-top: none;
-	}
-	
-	.hide {
-		display: none;
-	}
-	
-	* {
-  	  box-sizing: border-box;
-	}
-
-	body {
-	    margin: 0;
-	}
-	
-	.column {
-	    float: left;
-	    padding: 10px;
-	}
-
-	.row:after {
-	    content: "";
-	    display: table;
-	    clear: both;
-	}
-</style>
-</head>
-<body>
-<div class="row">
-	<div class="column">
-		Fuel: <span id="fuel">0</span> Fuel<br />
-		Oxygen: <span id="oxygen">0</span> Oxygen
-	</div>
-	<div class="column">
-		<div class="padding">
-			<div class="tab">
-			  <button class="tablinks" onclick="openCity(event, 'General')">General</button>
-			  <button class="tablinks, none" onclick="openCity(event, 'Paris')">Paris</button>
-			  <button class="tablinks, none" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+	<head>
+		<style>
+			body {
+				font-family: "Times New Roman", Times, serif;
+			}
+			
+			.off {
+				background-color: #0b0f16;
+			}
+			
+			.on {
+				transition: 4s;
+				background-color: white;
+			}
+			
+			.red {
+				color: red;
+			}
+			
+			.green {
+				color: green;
+			}
+			
+			button.dark {
+				border-color: rgb(6, 6, 6, 0.5)
+			}
+			
+			.padding {
+				padding-left:150px;
+			}
+			
+			.tab {
+				overflow: hidden;
+			}
+			
+			.tab button {
+				background-color: inherit;
+				float: left;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				padding: 14px 16px;
+				transition: 0.1s;
+				font-size: 17px;
+				font-family: "Times New Roman", Times, serif;
+				text-decoration: underline;
+			}
+			
+			.tab button.active {
+				background-color: rgb(251, 251, 251, 0.2);
+			}
+			
+			.tabcontent {
+				display: none;
+				padding: 6px 12px;
+				border-top: none;
+			}
+			
+			.hide { display: none; transition: 1s; }
+			
+			* {
+			  box-sizing: border-box;
+			}
+			
+			body {
+				margin: 0;
+			}
+			
+			.column {
+				float: left;
+				padding: 10px;
+			}
+			
+			.row:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+		</style>
+	</head>
+	<body class="off" id="body">
+		<div class="row">
+			<div class="column">
+				<br />
+				Hydrogen: <span id="hydrogen">100</span> L
+				<br />
+				Oxygen: <span id="oxygen">300</span> L
+				<br />
+				Unprocessed Rock: <span id="rock">0</span> lbs
+				<br />
+				Energy: <span id="energyP">0</span> W
 			</div>
-
-			<div id="General" class="tabcontent">
-
+			<div class="column">
+				<br />
+				(<span id="hydrogenP">0</span>)
+				<br />
+				(<span id="oxygenP">-0.5</span>)
+				<br />
+				(<span id="rockP">0</span>)
+				<br />
+				(<span id="energyP">0</span>)
 			</div>
+			<div class="column">
+				<div class="padding">
+					<div class="tab">
+					  <button class="tablinks" onclick="openCity(event, 'General')">General</button>
+					  <button class="tablinks hide" onclick="openCity(event, 'Console')" id="console">Console</button>
+					  <button class="tablinks hide" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+					</div>
 
-			<div id="Paris" class="tabcontent">
-			  <h3>Paris</h3>
-			  <p>Paris is the capital of France.</p> 
-			</div>
+					<div id="General" class="tabcontent">
+						Current Location: <span id="location">Asteroid</span><br /><br />
+						<button onclick="openConsole()" class="off dark" id="turnOnConsole">Turn On Console</button>
+					</div>
 
-			<div id="Tokyo" class="tabcontent">
-			  <h3>Tokyo</h3>
-			  <p>Tokyo is the capital of Japan.</p>
+					<div id="Console" class="tabcontent">
+						<span id="consoleStatus" class="green">Console Online</span><br />
+						<span id="engineStatus" class="red">Engines Offline</span><br />
+						<span id="drillStatus" class="red">Drill Offline</span><br />
+						<span id="harvesterStatus" class="red">Gas Harvester Offline</span><br />
+						<span id="foodStatus" class="red">Food Production Offline</span><br />
+						<span id="oxygenStatus" class="red">Oxygen Production Offline</span><br />
+						<span id="energyStatus" class="red">Energy Production Offline</span><br />
+						<span id="scienceStatus" class="red">Science Lab Offline</span><br />
+					</div>
+
+					<div id="Tokyo" class="tabcontent">
+					  <h3>Tokyo</h3>
+					  <p>Tokyo is the capital of Japan.</p>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
-<script>
-function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-</script>
-     
-</body>
+		<script>
+		function openConsole() {
+			document.getElementById("console").classList.remove("hide");
+			document.getElementById("body").classList.remove("off");
+			document.getElementById("body").classList.add("on");
+			document.getElementById("turnOnConsole").classList.add("hide");
+		}
+		
+		function oxygenR(){
+			//oxygenP = population*0.5..;
+			oxygen = oxygen + oxygenP;
+			document.getElementById('oxygen').innerHTML = oxygen;
+		}
+		
+		var hydrogen = 100;
+		
+		var oxygen = 300;
+		var oxygenP = -0.5;
+		var rock = 0;
+		
+		var energy = 0;
+		
+		
+		function openCity(evt, cityName) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablinks");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+			document.getElementById(cityName).style.display = "block";
+			evt.currentTarget.className += " active";
+		}
+		
+		window.setInterval(function(){
+			oxygenR()
+		}, 1000);
+
+		</script>
+	</body>
 </html> 
