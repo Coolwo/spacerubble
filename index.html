@@ -39,34 +39,57 @@
 	.hide {
 		display: none;
 	}
+	
+	* {
+  	  box-sizing: border-box;
+	}
+
+	body {
+	    margin: 0;
+	}
+	
+	.column {
+	    float: left;
+	    width: 50%;
+	    padding: 10px;
+	}
+
+	.row:after {
+	    content: "";
+	    display: table;
+	    clear: both;
+	}
 </style>
 </head>
 <body>
-Fuel: <span id="fuel">0</span> Fuel
-Oxygen: <span id="oxygen">0</span> Oxygen
+<div class="row">
+	<div class="column">
+		Fuel: <span id="fuel">0</span> Fuel<br />
+		Oxygen: <span id="oxygen">0</span> Oxygen
+	</div>
+	<div class="column">
+		<div class="padding">
+			<div class="tab">
+			  <button class="tablinks" onclick="openCity(event, 'General')">General</button>
+			  <button class="tablinks, none" onclick="openCity(event, 'Paris')">Paris</button>
+			  <button class="tablinks, none" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+			</div>
 
-<div class="padding">
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'General')">General</button>
-  <button class="tablinks, none" onclick="openCity(event, 'Paris')">Paris</button>
-  <button class="tablinks, none" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-</div>
+			<div id="General" class="tabcontent">
 
-<div id="General" class="tabcontent">
-	
-	
-	
-</div>
+			</div>
 
-<div id="Paris" class="tabcontent">
-  <h3>Paris</h3>
-  <p>Paris is the capital of France.</p> 
-</div>
+			<div id="Paris" class="tabcontent">
+			  <h3>Paris</h3>
+			  <p>Paris is the capital of France.</p> 
+			</div>
 
-<div id="Tokyo" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
-</div>
+			<div id="Tokyo" class="tabcontent">
+			  <h3>Tokyo</h3>
+			  <p>Tokyo is the capital of Japan.</p>
+			</div>
+		</div>
+	</div>
 </div>
 <script>
 function openCity(evt, cityName) {
